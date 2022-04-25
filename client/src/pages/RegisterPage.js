@@ -6,18 +6,29 @@ function RegisterPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
+  const [avatars, setAvatars] = useState({});
 
   const { register } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const data = {
       username,
       password,
       firstName,
       lastName,
     };
+
     register(data);
+  };
+
+  const handleFileChange = (event) => {
+    const uniqueId = Date.now();
+    setAvatars({
+      ...avatars,
+      [uniqueId]: event.target.files[0],
+    });
   };
 
   return (
@@ -85,17 +96,29 @@ function RegisterPage() {
           </label>
         </div>
         <div className="input-container">
-          <label>
+          <label htmlFor="upload">
             Avatar
             <input
-              id="avatar"
+              id="upload"
               name="avatar"
               type="file"
               placeholder="Enter last name here"
-              multiple
-              onChange={(event) => {}}
+              onChange={handleFileChange}
+              hidden
             />
           </label>
+          <div className="image-preview-container">
+            {Object.keys(avatars).map((avatarKey) => {
+              const file = avatars[avatarKey];
+              return (
+                <img
+                  className="image-preview"
+                  src={URL.createObjectURL(file)}
+                  alt={file.name}
+                />
+              );
+            })}
+          </div>
         </div>
         <div className="form-actions">
           <button type="submit">Submit</button>

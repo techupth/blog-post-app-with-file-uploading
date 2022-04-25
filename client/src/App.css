@@ -228,3 +228,30 @@ button {
   outline: none;
   border: 5px solid var(--secondary-color);
 }
+
+label[for="upload"] {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  border-radius: 30px;
+  padding: 20px;
+  width: 256px;
+  color: white;
+  font-size: 30px;
+  outline: none;
+  border: 5px solid var(--secondary-color);
+}
+
+/* Image preview */
+.image-preview-container {
+  display: flex;
+}
+
+.image-preview {
+  width: 300px;
+  height: 300px;
+  margin: 30px 30px 0 0;
+  border-radius: 10px;
+  object-fit: cover;
+}
