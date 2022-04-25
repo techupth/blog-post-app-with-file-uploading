@@ -31,6 +31,12 @@ function RegisterPage() {
     });
   };
 
+  const handleRemoveImage = (event, avatarKey) => {
+    event.preventDefault();
+    delete avatars[avatarKey];
+    setAvatars({ ...avatars });
+  };
+
   return (
     <div className="register-form-container">
       <form className="register-form" onSubmit={handleSubmit}>
@@ -107,15 +113,23 @@ function RegisterPage() {
               hidden
             />
           </label>
-          <div className="image-preview-container">
+          <div className="image-list-preview-container">
             {Object.keys(avatars).map((avatarKey) => {
               const file = avatars[avatarKey];
               return (
-                <img
-                  className="image-preview"
-                  src={URL.createObjectURL(file)}
-                  alt={file.name}
-                />
+                <div key={avatarKey} className="image-preview-container">
+                  <img
+                    className="image-preview"
+                    src={URL.createObjectURL(file)}
+                    alt={file.name}
+                  />
+                  <button
+                    className="image-remove-button"
+                    onClick={(event) => handleRemoveImage(event, avatarKey)}
+                  >
+                    x
+                  </button>
+                </div>
               );
             })}
           </div>
