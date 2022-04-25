@@ -13,14 +13,18 @@ function RegisterPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const data = {
-      username,
-      password,
-      firstName,
-      lastName,
-    };
+    const formData = new FormData();
 
-    register(data);
+    formData.append("username", username);
+    formData.append("password", password);
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+
+    for (let avatarKey in avatars) {
+      formData.append("avatar", avatars[avatarKey]);
+    }
+
+    register(formData);
   };
 
   const handleFileChange = (event) => {
