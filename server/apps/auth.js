@@ -1,11 +1,16 @@
 import { Router } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import multer from "multer";
+
 import { db } from "../utils/db.js";
 
 const authRouter = Router();
+const upload = multer({ dest: "uploads/" });
 
-authRouter.post("/register", async (req, res) => {
+const avatarUpload = upload.fields([{ name: "avatar", maxCount: 2 }]);
+
+authRouter.post("/register", avatarUpload, async (req, res) => {
   const user = {
     username: req.body.username,
     password: req.body.password,
