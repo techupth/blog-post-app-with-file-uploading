@@ -2,13 +2,12 @@ import { Router } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import multer from "multer";
-
 import { db } from "../utils/db.js";
-
+import { cloudinaryUpload } from "../utils/upload.js";
 const authRouter = Router();
-const upload = multer({ dest: "uploads/" });
 
-const avatarUpload = upload.fields([{ name: "avatar", maxCount: 2 }]);
+const multerUpload = multer({ dest: "uploads/" });
+const avatarUpload = multerUpload.fields([{ name: "avatar", maxCount: 2 }]);
 
 authRouter.post("/register", avatarUpload, async (req, res) => {
   const user = {
@@ -17,6 +16,9 @@ authRouter.post("/register", avatarUpload, async (req, res) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
   };
+
+  const avatarUrl = await cloudinaryUpload(req.files);
+  user["avatars"] = avatarUrl;
 
   const salt = await bcrypt.genSalt(10);
   // now we set user password to hashed password
