@@ -6,7 +6,7 @@ import { db } from "../utils/db.js";
 import { cloudinaryUpload } from "../utils/upload.js";
 const authRouter = Router();
 
-const multerUpload = multer({ dest: "uploads/" });
+const multerUpload = multer({ dest: "public\\files" });
 const avatarUpload = multerUpload.fields([{ name: "avatar", maxCount: 2 }]);
 
 authRouter.post("/register", avatarUpload, async (req, res) => {
