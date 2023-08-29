@@ -10,6 +10,8 @@ import cloudinary from "cloudinary";
 async function init() {
   dotenv.config();
 
+  // Step 0: ให้ติดตั้ง Package "cloudinary"
+  // จากนั้น ให้เอาข้อมูล API KEY จากเว็บไซต์ Cloudinary มา Setup ที่ฝั่ง Server
   cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,

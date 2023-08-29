@@ -24,6 +24,7 @@ function RegisterPage() {
       formData.append("avatar", avatars[avatarKey]);
     }
 
+    // Step 1: นำ Function register ที่ใช้ส่ง Request พร้อมไฟล์ไปยัง Server มา Execute ตอนที่กดปุ่ม Submit ฟอร์ม
     register(formData);
   };
 
@@ -105,6 +106,7 @@ function RegisterPage() {
             />
           </label>
         </div>
+        {/* Step 0: ให้สร้างปุ่มสำหรับกด Upload ไฟล์ */}
         <div className="input-container">
           <label htmlFor="upload">
             Avatar
@@ -118,6 +120,7 @@ function RegisterPage() {
             />
           </label>
           <div className="image-list-preview-container">
+            {/* Step 0: เอารูปภาพที่ผู้ใช้งานเลือกมาแสดงผล */}
             {Object.keys(avatars).map((avatarKey) => {
               const file = avatars[avatarKey];
               return (
